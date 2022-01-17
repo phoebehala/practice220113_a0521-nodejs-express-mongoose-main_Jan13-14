@@ -7,7 +7,10 @@ exports.getLogin = (req,res,next) => {
 }
 
 exports.postLogin = (req,res,next) => {
-    res.isLoggedIn =true;
+    console.log(req.body);  // req.body >>> is the name from auth/login.ejs   such as  <input class="input" type="text" name="username" />
+    
+    // res.isLoggedIn =true;
+    res.setHeader('Set-Cookie', 'loggedIn=true')
     res.redirect('/')
 }
 
