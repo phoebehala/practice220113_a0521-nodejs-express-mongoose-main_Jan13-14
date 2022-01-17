@@ -1,0 +1,51 @@
+<%- include('../includes/head.ejs') %>
+<body>
+    <%- include('../includes/nav.ejs') %>
+    <main class="container is-max-desktop">
+        <form class="mt-6" action="/admin<% if(editing) { %>/edit-product<% }else{ %>/add-product<% } %>" method="post">
+            <div class="field">
+                <label class="label" for="title">Title</label>
+                <div class="control">
+                    <input class="input" type="text" name="title" value="<% if(editing) { %><%= product.title%><% } %>" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="title">Image URL</label>
+                <div class="control">
+                    <input class="input" type="text" name="imageUrl" value="<% if(editing) { %><%= product.imageUrl%><% } %>" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="title">Price</label>
+                <div class="control">
+                    <input class="input" type="number" name="price" value="<% if(editing) { %><%= product.price%><% } %>" />
+                </div>
+            </div>
+            <div class="field">
+                <label class="label" for="title">Description</label>
+                <div class="control">
+                    <textarea class="textarea" name="description" rows="5"><% if(editing) { %><%= product.description %><% } %></textarea>
+                </div>
+            </div>
+
+            <% if(editing) { %>
+                <input type="hidden" value="<%= product._id %>" name="productId" />
+            <% } %>
+
+
+
+            <button class="button is-success" type="submit">
+                <span class="icon is-small">
+                    <% if(editing) { %>
+                        <i class="fas fa-check"></i>
+                    <% }else{ %>
+                        <i class="fas fa-plus"></i>
+                    <% } %>
+                </span>
+                <span>
+                    <% if(editing) { %>Edit<% }else{ %>Add<% } %> Product
+                </span>
+            </button>
+        </form>
+    </main>
+<%- include('../includes/end.ejs') %>

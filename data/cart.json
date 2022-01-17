@@ -1,0 +1,21 @@
+{
+    "products": [
+        {
+            "id": "61e09fc92c783b9871b51fc2",
+            "quantity": 2
+        },
+        {
+            "id": "61e0a209855886b09f6539b1",
+            "quantity": 1
+        },
+        {
+            "id": "61e0a218855886b09f6539b2",
+            "quantity": 1
+        },
+        {
+            "id": "",
+            "quantity": 1
+        }
+    ],
+    "totalPrice": null
+}
