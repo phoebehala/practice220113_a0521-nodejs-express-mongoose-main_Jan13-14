@@ -10,8 +10,22 @@ const getById = (productId) =>{
 }
 
 
-exports.getProducts = (req,res,next) => {
-    
+exports.getProducts = (req, res, next) => {
+
+    // Model.find() >>> find all 
+    // QueryCursor
+    Products.find((err, data) => {
+      if (err) console.log(err)
+        
+      //console.log("find() data:",data); // retruns an array with each product inside
+      res.render('shop/product-list', {
+        pageTitle: 'Home - All Products',
+        products: data,
+      })
+    })
+  
+
+    /* Cookie
     const isAuth = req.get('Cookie').split("=")[1]
     console.log('login cookie from shopping controller:',req.get('Cookie').split("=")[1]); //loggedIn=true
 
@@ -30,9 +44,9 @@ exports.getProducts = (req,res,next) => {
             })
           })
     }else{  // send the user to login page
+    */
 
 
-}
 
     /* wrong !!
     Products.find().then((products) => {

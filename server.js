@@ -5,6 +5,8 @@ const path = require('path')
 const mongoose = require('mongoose')
 require('dotenv').config()
 
+const session = require('express-session')
+const MongoDBStore = require('connect-mongodb-session')(session)
 
 const shopRoute = require('./routes/shop.route')
 const adminRoute = require('./routes/admin.route')
@@ -13,12 +15,28 @@ const authRoute = require('./routes/auth.route')
 const User = require('./models/user.model')
 
 const app = express()
+const store = new MongoDBStore({
+    uri: process.env.MONGODB_URL,
+    collection: 'sessions'
+})
 
 app.set('view engine', 'ejs')
 
 app.use(bodyParser.urlencoded({extended:false}))
 // app.use('/public', express.static('public'))
 app.use(express.static(path.join(__dirname, 'public')))
+app.use(session({
+    secret: 'thisIsaSuperSecretString',   // anything you don't want to expose
+    resave: false,
+    saveUninitialized: false,
+    store:store
+}))
+
+app.use((req,res,next) => {
+    console.log('req.session.isLogged from server.js', req.session.isLogged);
+    //res.locals.isAuth = req.session.isLoggedIn
+    next()
+})
 
 // dummy auth flow
  app.use((req, res, next)=>{
