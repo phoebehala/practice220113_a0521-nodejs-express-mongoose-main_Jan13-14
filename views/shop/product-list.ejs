@@ -25,7 +25,13 @@
                                     </div>
                                 </div>
                         
-                                <div class="content"><%= product.description %></div>
+                                <div class="content">
+                                    <% if(product.description.length >= 25) { %>
+                                        <%= product.description.slice(0, 25).concat('...') %>
+                                    <% }else{ %>
+                                        <%= product.description %>
+                                    <% } %>
+                                </div>
                             </div>
                             <footer class="card-footer">
                                 <a class="card-footer-item" href="/products/<%= product._id %>" >Details</a>

@@ -34,19 +34,20 @@ app.use(session({
 
 app.use((req,res,next) => {
     console.log('req.session.isLogged from server.js', req.session.isLogged);
-    //res.locals.isAuth = req.session.isLoggedIn
+    res.locals.isAuth = req.session.isLoggedIn
     next()
 })
 
 // dummy auth flow
+/*
  app.use((req, res, next)=>{
-     /* hard code to insert a new user to db
+     // hard code to insert a new user to db
      const user = new User('admin', 'admin@hala.com')
      user.save().then(result => {
              console.log(result)
              next()
          }).catch(err=>console.log(err))
-     */
+     
     User.findById('61e205452fed7385efa97a17', (err, user)=>{
         if(err) console.log(err);
 
@@ -66,6 +67,7 @@ app.use((req,res,next) => {
     })
          
  })
+ */
 
 app.use('/admin', adminRoute)
 app.use(shopRoute)
